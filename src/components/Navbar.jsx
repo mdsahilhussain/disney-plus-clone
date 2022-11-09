@@ -1,71 +1,61 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase";
-// import {
-//   selectUserName,
-//   selectUserPhoto,
-//   setUserLoginDetails,
-//   setSignOutState,
-// } from "../features/user/userSlice";
+import {
+  selectUserName,
+  selectUserPhoto,
+  setUserLoginDetails,
+  setSignOutState,
+} from "../feature/user/userSlice";
 
 const Navbar = (props) => {
-  //   const dispatch = useDispatch();
-  //   const history = useHistory();
-  const userName = false;
-  //   const userPhoto = useSelector(selectUserPhoto);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
 
-  //   useEffect(() => {
-  //     auth.onAuthStateChanged(async (user) => {
-  //       if (user) {
-  //         setUser(user);
-  //         history.push("/home");
-  //       }
-  //     });
-  //   }, [userName]);
+    useEffect(() => {
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          setUser(user);
+          navigate("/home", { replace: true });
+        }
+      });
+    }, [userName]);
+
 
   const handleAuth = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    if (!userName) {
+      auth
+        .signInWithPopup(provider)
+        .then((result) => {
+          setUser(result.user);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else if (userName) {
+      auth
+        .signOut()
+        .then(() => {
+          dispatch(setSignOutState());
+          navigate("/", { replace: true });
+        })
+        .catch((err) => alert(err.message));
+    }
   };
 
-  //   const handleAuth = () => {
-  //     if (!userName) {
-  //       auth
-  //         .signInWithPopup(provider)
-  //         .then((result) => {
-  //           setUser(result.user);
-  //         })
-  //         .catch((error) => {
-  //           alert(error.message);
-  //         });
-  //     } else if (userName) {
-  //       auth
-  //         .signOut()
-  //         .then(() => {
-  //           dispatch(setSignOutState());
-  //           history.push("/");
-  //         })
-  //         .catch((err) => alert(err.message));
-  //     }
-  //   };
-
-  //   const setUser = (user) => {
-  //     dispatch(
-  //       setUserLoginDetails({
-  //         name: user.displayName,
-  //         email: user.email,
-  //         photo: user.photoURL,
-  //       })
-  //     );
-  //   };
+  const setUser = (user) => {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    );
+  };
 
   return (
     <Nav>
@@ -104,9 +94,9 @@ const Navbar = (props) => {
             </a>
           </NavMenu>
           <SignOut>
-            <UserImg src={"userPhoto"} alt={"userName"} />
+            <UserImg src={userPhoto} alt={userName} />
             <DropDown>
-              <span onClick={"handleAuth"}>Sign out</span>
+              <span onClick={handleAuth}>Sign out</span>
             </DropDown>
           </SignOut>
         </>
@@ -204,9 +194,9 @@ const NavMenu = styled.div`
     }
   }
 
-  /* @media (max-width: 768px) {
+@media (max-width: 768px) {
     display: none;
-  } */
+  } 
 `;
 
 const Login = styled.a`
