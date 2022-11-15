@@ -10,7 +10,7 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import db from "../firebase";
-// import { setMovies } from "../feature/movie/movieSlice";
+import { setMovies } from "../feature/movie/movieSlice";
 import { selectUserName } from "../feature/user/userSlice";
 
 const Home = (props) => {
@@ -22,10 +22,9 @@ const Home = (props) => {
   let trending = [];
 
   useEffect(() => {
-    console.log("hello");
     db.collection("movies").onSnapshot((snapshot) => {
       snapshot.docs.map((doc) => {
-        console.log(recommends);
+        // console.log(recommends);
         // eslint-disable-next-line default-case
         switch (doc.data().type) {
           case "recommend":
@@ -50,13 +49,14 @@ const Home = (props) => {
         }
       });
 
-      dispatch();
-      // setMovies({
-      //   recommend: recommends,
-      //   newDisney: newDisneys,
-      //   original: originals,
-      //   trending: trending,
-      // })
+      dispatch(
+        setMovies({
+          recommend: recommends,
+          newDisney: newDisneys,
+          original: originals,
+          trending: trending,
+        })
+      );
     });
   }, [userName]);
 
