@@ -24,7 +24,6 @@ const Home = (props) => {
   useEffect(() => {
     db.collection("movies").onSnapshot((snapshot) => {
       snapshot.docs.map((doc) => {
-        // console.log(recommends);
         // eslint-disable-next-line default-case
         switch (doc.data().type) {
           case "recommend":

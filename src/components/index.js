@@ -6,6 +6,7 @@ export { default as Trending } from "./Trending";
 export { default as Recommends } from "./Recommends";
 export { default as Originals } from "./Originals";
 export { default as NewDisney } from "./NewDisney";
+export { default as Detail } from "./Detail";
 
 
 
