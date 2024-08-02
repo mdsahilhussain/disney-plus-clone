@@ -1,12 +1,5 @@
 # Disney+ Clone with REACT JS
 
-<a href="https://disney-plus-clone-976a1.web.app" target="_blank">![](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)</a>
-![](https://img.shields.io/badge/Maintained-Yes-indigo)
-![](https://img.shields.io/github/forks/SashenJayathilaka/Disney-Plus-Clone.svg)
-![](https://img.shields.io/github/stars/SashenJayathilaka/Disney-Plus-Clone.svg)
-![](https://img.shields.io/github/issues/SashenJayathilaka/Disney-Plus-Clone)
-![](https://img.shields.io/github/last-commit/SashenJayathilaka/Disney-Plus-Clone)
-
 <!-- Screenshots -->
 ### :camera: Screenshots
 
@@ -14,15 +7,6 @@
 
 <a href="https://disney-plus-clone-976a1.firebaseapp.com/" target="_blank"> <img width='800rem' src="https://user-images.githubusercontent.com/99184393/177023743-7bbda27b-03d6-49c6-9527-49635217cfda.png" alt=""/></a>
 </div>
-
-## <a href="https://disney-plus-clone-976a1.web.app" target="_blank">LIVE DEMO 💥</a>
-
-
-![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)
-![forthebadge](https://forthebadge.com/images/badges/for-you.svg)
-![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)
-
-
 
 ### :space_invader: Tech Stack
 
